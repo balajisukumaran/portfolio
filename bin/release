@@ -1,0 +1,3 @@
+#!/bin/bash
+# Provides runtime metadata to Heroku
+echo "version: 1"

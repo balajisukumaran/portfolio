@@ -1,0 +1,7 @@
+#!/bin/bash
+# Checks if the app should use this buildpack
+if [ -f "index.html" ]; then
+  exit 0
+else
+  exit 1
+fi
