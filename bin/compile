@@ -1,3 +1,0 @@
-#!/bin/bash
-# Script to setup the environment - this can be very simple or complex depending on need
-echo "Nothing to compile for static site"
