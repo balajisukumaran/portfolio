@@ -1,0 +1,35 @@
+daemon off; # Required by Heroku
+worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
+
+events {
+  use epoll;
+  accept_mutex on;
+  worker_connections <%= ENV['NGINX_WORKER_CONNECTIONS'] || 1024 %>;
+}
+
+http {
+  gzip on;
+  gzip_comp_level 2;
+  gzip_min_length 512;
+  server_tokens off;
+
+  server {
+    listen <%= ENV["PORT"] %>;
+    server_name _;
+    keepalive_timeout 5;
+
+    location / {
+      root /; # Adjust this path based on where your files are located
+      index index.html;
+      try_files $uri $uri/index.html $uri.html =404;
+    }
+
+    location = /favicon.ico {
+      access_log off; log_not_found off;
+    }
+
+    location ~ /\.ht {
+      deny all;
+    }
+  }
+}
